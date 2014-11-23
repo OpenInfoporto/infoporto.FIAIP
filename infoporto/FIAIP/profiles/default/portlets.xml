@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<portlets>
+  <portlet addview="property-portlet" title="Property Portlet" description="Portlet with display property" />
+  <portlet addview="property-search-portlet" title="Property search Portlet" description="Portlet with display property search" />
+</portlets>

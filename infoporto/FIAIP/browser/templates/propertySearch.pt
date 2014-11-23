@@ -1,0 +1,62 @@
+<tal:block i18n:domain="infoporto.FIAIP">
+    <div class="portlet portletpropertysearch">
+        <div class="col-xs-4 sidebar-shadow">
+            <div class="sidebar">
+                <h3>Trova il tuo immobile</h3>
+                <form action="@@result-search"
+                    role="search"
+>
+                    <div class="form-group">
+                        <label for="comuneInputText1">Comune</label> 
+                        <select class="form-control"  name="comune">
+                            <tal:block tal:repeat="item view/getComuni">
+                                <option tal:content="item"  tal:attributes="value item"></option> 
+                            </tal:block>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoriaInputText2">Categoria</label> 
+                        <select class="form-control"  name="category">
+                            <tal:block tal:repeat="item view/getCategoria">
+                                <option tal:content="item"  tal:attributes="value item"></option>
+                            </tal:block>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contrattoInputText3">Contratto</label> 
+                        <select class="form-control"  name="contratto">
+                            <tal:block tal:repeat="item view/getContratto">
+                                <option tal:content="item"  tal:attributes="value item"></option>
+                            </tal:block>
+                        </select>
+                    </div>
+                    <div class="col-xs-5 form-group prezzo-left">
+                        <label for="contrattoInputText4">Prezzo minimo</label> 
+                        <select class="form-control" id="contrattoInputText4"  name="minprice">
+                            <tal:block tal:repeat="item view/getPrezzoMinimo">
+                                <option tal:content="item"  tal:attributes="value item"></option>
+                            </tal:block>
+                        </select>
+                    </div>
+                    <div class="col-xs-5 form-group prezzo-right">
+                        <label for="contrattoInputText5 id=">Prezzo massimo</label> 
+                        <select class="form-control" id="contrattoInputText5"  name="maxprice">
+                            <tal:block tal:repeat="item view/getPrezzoMinimo">
+                                <option tal:content="item"  tal:attributes="value item"></option>
+                            </tal:block>
+                        </select>
+                    </div>
+                    <button class="btn btn-lg" type="submit">cerca il tuo immobile</button>
+                    <h3>Ricerca rapida</h3>
+                    <button class="btn tag" type="submit" name="vani" value="2">2 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="3">3 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="4">4 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="5">5 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="Affitti">Affitti</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="Fondi">Fondi</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="Rustici">Rustici</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</tal:block>

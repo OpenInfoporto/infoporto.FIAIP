@@ -1,0 +1,28 @@
+<tal:block i18n:domain="infoporto.FIAIP">
+    <div class="portlet portletproperty">
+      <tal:block tal:repeat="item view/properties">
+        <div class="property">
+            <div class="property-image">
+               <img tal:replace="structure item/getImage" />
+            </div>
+            <span class="property-type" tal:content="item/contratto" />
+            <div class="property-content">
+                <h4>
+                    <span class="property-title" tal:content="item/title"/>
+                </h4>
+                <h5>
+                    <span class="property-location" tal:content="item/localita"/>
+                    <span class="property-province" tal:content="item/provincia"/>               
+                </h5>
+                <p class="property-description" tal:content="structure item/full_description/output"></p>
+            </div>
+             <div class="property-details">
+                <span class="property-price" tal:content="item/getPriceString"></span>
+                <a tal:attributes="href item/absolute_url" class="property-read">
+                    Leggi tutto
+                </a>
+            </div>
+        </div>
+    </tal:block>
+    </div>
+</tal:block>

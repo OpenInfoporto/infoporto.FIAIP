@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object name="portal_catalog">
+    <index name="comune" meta_type="FieldIndex">
+        <indexed_attr value="comune"/>
+    </index>
+    <index name="vani" meta_type="FieldIndex">
+        <indexed_attr value="vani"/>
+    </index>
+    <index name="categoria" meta_type="FieldIndex">
+        <indexed_attr value="categoria"/>
+    </index>
+    <index name="contratto" meta_type="FieldIndex">
+        <indexed_attr value="contratto"/>
+    </index>
+
+    <column value="comune"/>
+    <column value="contratto"/>
+    <column value="categoria"/>
+    <column value="vani"/>
+</object>

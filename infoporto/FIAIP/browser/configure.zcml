@@ -1,0 +1,37 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="infoporto.FIAIP">
+
+    <include package="plone.app.portlets" />
+
+    <plone:portlet
+        name="property-portlet"
+        interface=".property.IPropertyPortlet"
+        assignment=".property.Assignment"
+        renderer=".property.Renderer"
+        addview=".property.AddForm"
+        editview=".property.EditForm"
+        />
+
+     <plone:portlet
+        name="property-search-portlet"
+        interface=".propertySearch.IPropertySearchPortlet"
+        assignment=".propertySearch.Assignment"
+        renderer=".propertySearch.Renderer"
+        addview=".propertySearch.AddForm"
+        editview=".propertySearch.EditForm"
+        />
+
+     <browser:page
+        for="*"
+        name="result-search"
+        template="templates/result.pt"
+        class=".result.Result"
+        permission="zope2.View"
+        />
+
+
+</configure>
+

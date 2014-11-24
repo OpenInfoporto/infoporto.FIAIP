@@ -9,9 +9,10 @@
                 <tal:block tal:repeat="item view/properties">
                     <div class="property">
                         <div class="property-image">
-                            <img tal:replace="structure item/getImage" />
+                            <img tal:attributes="src string:${item/getPreview}/image_thumb" class="make-box"/>
                         </div>
-                        <span class="property-type" tal:content="item/contratto" />
+                        <span class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
+                        <span class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
                         <div class="property-content">
                             <h4>
                                 <span class="property-title" tal:content="item/title"/>

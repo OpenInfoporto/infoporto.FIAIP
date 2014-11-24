@@ -31,7 +31,7 @@
                         </select>
                     </div>
                     <div class="col-xs-5 form-group prezzo-left">
-                        <label for="contrattoInputText4">Prezzo minimo</label> 
+                        <label for="contrattoInputText4">Prezzo min</label> 
                         <select class="form-control" id="contrattoInputText4"  name="minprice">
                             <tal:block tal:repeat="item view/getPrezzoMinimo">
                                 <option tal:content="item"  tal:attributes="value item"></option>
@@ -39,7 +39,7 @@
                         </select>
                     </div>
                     <div class="col-xs-5 form-group prezzo-right">
-                        <label for="contrattoInputText5 id=">Prezzo massimo</label> 
+                        <label for="contrattoInputText5 id=">Prezzo max</label> 
                         <select class="form-control" id="contrattoInputText5"  name="maxprice">
                             <tal:block tal:repeat="item view/getPrezzoMinimo">
                                 <option tal:content="item"  tal:attributes="value item"></option>
@@ -56,6 +56,16 @@
                     <button class="btn tag" type="submit"  name="vani" value="Fondi">Fondi</button> 
                     <button class="btn tag" type="submit"  name="vani" value="Rustici">Rustici</button>
                 </form>
+            <h4>non hai trovato l’immobile?</h4>
+<p>Lo cerchiamo noi per te. Inserisci i tuoi dati anagrafici e sarai ricontattato.</p>
+<form action="resolveuid/565cf4f627234fc9a2507a899ddf7679" method="get"><button class="btn left" type="submit">inserisci la tua email</button></form><form><br />
+<h3>Come contattarci</h3>
+<div class="home">
+<p>Pellentesque habitant morbi tristique senectus et netus et male suada fames ac turpis egestas. <br /><br /> <span class="blue"> Telefono. 0187-123456 <br /> E-mail info@minottoimmobiliare.it <br /> P.IVA 01212345678 <br /> </span></p>
+<p class="sidebar-footer">MINOTTO IMMOBILIARE <br /><br /> Iscrizione REA n.123456 <br /><br /> è iscritto alla FIAIP n. 123456678</p>
+</div>
+</form>
+    
             </div>
         </div>
     </div>

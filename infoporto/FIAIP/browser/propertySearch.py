@@ -38,7 +38,8 @@ class Renderer(base.Renderer):
     render = ViewPageTemplateFile('templates/propertySearch.pt')
 
     def getComuni(self):
-        return [None,_(u'Massa Carrara'), _(u'La Spezia')]
+        catalog = api.portal.get_tool(name='portal_catalog')
+        return set([el.comune for el in catalog(portal_type='infoporto.FIAIP.property')])
 
     def getCategoria(self):
         return [None,_(u'Residenziale'), _(u'Commerciale'), _(u'Rustici e terreni'),_(u'Uffici, fondi')]

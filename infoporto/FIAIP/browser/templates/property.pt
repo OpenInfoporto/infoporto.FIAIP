@@ -1,12 +1,13 @@
 <tal:block i18n:domain="infoporto.FIAIP">
     <div class="portlet portletproperty">
       <tal:block tal:repeat="item view/properties">
-        <div class="property">
+        <div class="property-block">
             <div class="property-image">
-               <img tal:replace="structure item/getImage" />
+               <img tal:replace="structure item/getImage"/>
+                <span class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
+                <span class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
             </div>
-            <span class="property-type" tal:content="item/contratto" />
-            <div class="property-content">
+            <div class="property-contenta border-left">
                 <h4>
                     <span class="property-title" tal:content="item/title"/>
                 </h4>
@@ -14,11 +15,11 @@
                     <span class="property-location" tal:content="item/localita"/>
                     <span class="property-province" tal:content="item/provincia"/>               
                 </h5>
-                <p class="property-description" tal:content="structure item/full_description/output"></p>
+                <p class="property-description" tal:content="item/Description" />
             </div>
              <div class="property-details">
-                <span class="property-price" tal:content="item/getPriceString"></span>
-                <a tal:attributes="href item/absolute_url" class="property-read">
+                <span class="property-price btn left" tal:content="item/getPriceString"></span>
+                <a tal:attributes="href item/absolute_url" class="property-read btn right">
                     Leggi tutto
                 </a>
             </div>

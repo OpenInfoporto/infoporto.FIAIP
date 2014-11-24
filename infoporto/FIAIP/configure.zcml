@@ -37,4 +37,12 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+<browser:menuItem
+        for="Products.ATContentTypes.interface.IATFolder"
+        menu="plone_displayviews"
+        title="Property listing"
+        action="@@property_listing"
+        description="List folder contents as property summary view"
+        />
+
 </configure>

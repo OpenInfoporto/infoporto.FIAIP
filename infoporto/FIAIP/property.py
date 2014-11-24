@@ -21,6 +21,10 @@ from infoporto.FIAIP import MessageFactory as _
 
 from collective import dexteritytextindexer
 
+from Acquisition import aq_inner
+from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.interfaces import IFolderish
+
 # Interface class; used to define content-type schema.
 
 class IProperty(form.Schema, IImageScaleTraversable):
@@ -231,11 +235,21 @@ class Property(Container):
     grok.implements(IProperty)
 
     def getPriceString(self):
-        return "%s %s/mese" % (self.prezzo,u"\u20AC")
+        if self.contratto == 'A':
+            return "%s %s/mese" % (self.prezzo,u"\u20AC")
+
+        if self.contratto == 'V':
+            return "%s %s" % (self.prezzo,u"\u20AC")
 
     def getImage(self):
         for item in self.listFolderContents():
             return item
+
+        return None
+
+    def getPreview(self):
+        for item in self.listFolderContents():
+            return item.absolute_url()
 
         return None
 
@@ -261,5 +275,9 @@ class View(grok.View):
 
     # Add view methods here
 
-    def getPhoto():
-        pass
+    def getPhoto(self):
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+
+        return catalog(portal_type="Image",
+                       path='/'.join(context.getPhysicalPath()))

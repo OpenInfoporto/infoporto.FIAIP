@@ -10,12 +10,13 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-<div class="col-xs-12 main-content"><!--Start SCHEDA-->
+    <div class="col-xs-12 main-content"><!--Start SCHEDA-->
                 <div class="gallery"> 
-                    <!-- qui inserire le foto 
-                        tal:repeat="item context/getPhoto">
-                        <img src="item/url" />
-                    -->
+                    <tal:block repeat="picture view/getPhoto">
+                        <div class="picture-element">
+                            <img tal:attributes="src string:${picture/getURL}/image_thumb; data-id picture/id; title picture/Title; rel picture/id" class="make-box"/>
+                        </div>
+                    </tal:block>
                 </div>
                 <div class="col-xs-12 content-top">
                     <div class="col-xs-9">
@@ -27,7 +28,7 @@
                         <img class="logo-content" src="img/ceA.jpg" alt=""> <!-- da ceA.jpg a ceG.jpg -->
                     </div>
                     <div class="col-xs-12 description">
-                        <div tal:content="context/full_description/raw" />
+                        <div tal:content="structure context/full_description/output" />
                         <p><span tal:content="context/categoria" /></p> <!-- ToDo fare decodifica -->
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                         </div>
                         <div class="col-xs-3">
                             <h3>Piano: <span tal:content="context/piano" /></h3>
-                            <h4>Ascensore: <span tal:content="context/ascensore" /></h4>
+                            <h4>Ascensore: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.ascensore else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
                         <div class="col-xs-3">&nbsp;
                         </div>
@@ -54,11 +55,11 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <h3>Condizioni: <span tal:content="context/condizioni" /></h3><!-- ToDo fare decodifica -->
-                            <h4>Arredato: <span tal:content="context/arredato" /> mq</h4>
+                            <h4>Arredato: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.arredato else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
                         <div class="col-xs-3">
-                            <h3>Giardino: <span tal:content="context/giardino" /></h3>
-                           <h4>Garage: <span tal:content="context/garage" /></h4>
+                            <h3>Giardino: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.giardino else 'glyphicon glyphicon-remove'"/></h3>
+                            <h4>Garage: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.garage else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
                         <div class="col-xs-3">
                             <h3>Riscaldamento: <span tal:content="context/riscaldamento" /></h3><!-- ToDo fare decodifica -->
@@ -67,8 +68,9 @@
                     </div>
                     
                     <div class="col-xs-12 text-right"><!-- Prezzi da gestire in base a valore "contratto" -->
-                        <div class="btn bold"><span tal:content="context/prezzo" /> €</div> <!-- if (contratto==V) -->
-                        <div class="btn bold"><span tal:content="context/prezzo" /> €/mese</div><!-- if (contratto==A) -->
+                        <div class="btn bold">
+                            <span tal:content="context/getPriceString"/>
+                        </div>
                     </div>
                     <div class="col-xs-12 text-right"><!-- Il pulsante deve portarsi dietro l'id immobile per la gestione delle richiesta informazioni-->
                         <button type="submit" class="btn"><img class="email" src="img/icon-email.png" alt="">Richiedi info</button>

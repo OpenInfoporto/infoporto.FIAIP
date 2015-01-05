@@ -137,6 +137,12 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
+    dexteritytextindexer.searchable('price')
+    price = schema.Float(
+            title=_(u"Prezzo vero"),
+            required=False,
+    )
+
 # Campo utilizzato nella scheda
     superficie = schema.TextLine(
             title=_(u"Superficie"),

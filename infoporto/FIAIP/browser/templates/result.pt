@@ -24,6 +24,8 @@
                                 <p class="property-description" tal:content="structure item/full_description/output"></p>
                         </div>
                         <div class="property-details">
+                            <img tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+                            tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/ce${item/classe_energ}.jpg" />
                             <span class="property-price" tal:content="item/getPriceString"></span>
                             <a tal:attributes="href item/absolute_url" class="property-read">
                                 Leggi tutto

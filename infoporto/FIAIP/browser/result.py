@@ -21,7 +21,6 @@ class Result(BrowserView):
 
     def properties(self):
         catalog = getToolByName(self.context, 'portal_catalog')
-        
         if not "vani" in self.request.form:
             query = {'portal_type': 'infoporto.FIAIP.property', "review_state" : "published"}
             if self.comune:
@@ -32,6 +31,12 @@ class Result(BrowserView):
 
             if self.contratto:
                 query["contratto"] = self.contratto
+
+            if self.minprice:
+                query["price"] = {'query': self.request.form["minprice"], 'range': 'min'}
+
+            if self.maxprice:
+                query["price"] = {'query': self.request.form["maxprice"], 'range': 'max'}
            
             items = catalog.searchResults(query) 
         else:

@@ -32,29 +32,21 @@
                     </div>
                     <div class="col-xs-5 form-group prezzo-left">
                         <label for="contrattoInputText4">Prezzo min</label> 
-                        <select class="form-control" id="contrattoInputText4"  name="minprice">
-                            <tal:block tal:repeat="item view/getPrezzoMinimo">
-                                <option tal:content="item"  tal:attributes="value item"></option>
-                            </tal:block>
-                        </select>
+                        <input type="text" class="col-xs-2 form-control" name="minprice" />
                     </div>
                     <div class="col-xs-5 form-group prezzo-right">
                         <label for="contrattoInputText5 id=">Prezzo max</label> 
-                        <select class="form-control" id="contrattoInputText5"  name="maxprice">
-                            <tal:block tal:repeat="item view/getPrezzoMinimo">
-                                <option tal:content="item"  tal:attributes="value item"></option>
-                            </tal:block>
-                        </select>
+                        <input type="text" class="col-xs-2 form-control" name="maxprice" />
                     </div>
                     <button class="btn btn-lg" type="submit">cerca il tuo immobile</button>
                     <h3>Ricerca rapida</h3>
-                    <button class="btn tag" type="submit" name="vani" value="2">2 Vani</button> 
-                    <button class="btn tag" type="submit"  name="vani" value="3">3 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="3">2-3 Vani</button> 
                     <button class="btn tag" type="submit"  name="vani" value="4">4 Vani</button> 
-                    <button class="btn tag" type="submit"  name="vani" value="5">5 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="5">5+ Vani</button> 
                     <button class="btn tag" type="submit"  name="vani" value="Affitti">Affitti</button> 
                     <button class="btn tag" type="submit"  name="vani" value="Fondi">Fondi</button> 
                     <button class="btn tag" type="submit"  name="vani" value="Rustici">Rustici</button>
+                    <button class="btn tag" type="submit"  name="vani" value="Indipendenti">Indipendenti</button>
                 </form>
             <h4>non hai trovato l’immobile?</h4>
 <p>Lo cerchiamo noi per te. Inserisci i tuoi dati anagrafici e sarai ricontattato.</p>

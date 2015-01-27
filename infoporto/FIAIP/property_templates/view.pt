@@ -13,21 +13,21 @@
 <!--<link rel="stylesheet" tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="href string:${navroot}/++resource++infoporto.FIAIP/css/screen.css">-->
     <link rel="stylesheet" tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="href string:${navroot}/++resource++infoporto.FIAIP/css/lightbox.css">
 
-<tal:block repeat="picture view/getPhoto">
+<tal:block repeat="picture view/getPhotos">
 
 <script type="text/javascript">
-$('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspeed="300"><img alt="rev-full1" tal:attributes="src string:${picture/getURL}/image_thumb; data-id picture/id; title picture/Title; rel picture/id" data-fullwidthcentering="on" />');
+$('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspeed="300"><img alt="rev-full1" tal:attributes="src string:${picture/url}; title picture/title;" data-fullwidthcentering="on" />');
 </script>
 </tal:block>
 
     <div class="test"> </div>
 
     <div class="col-xs-12 main-content"><!--Start SCHEDA-->
-                <div class="gallery"> 
-                    <tal:block repeat="picture view/getPhoto">
+                <div class="gallery">
+                    <tal:block repeat="picture view/getPhotos">
                         <div class="picture-element">
-                           <a class="example-image-link" tal:attributes="href string:${picture/getURL}" data-lightbox="example-set" data-title=" ">
-                             <img tal:attributes="src string:${picture/getURL}/image_thumb; data-id picture/id; title picture/Title; rel picture/id" class="example-image make-box"/>
+                           <a class="example-image-link" tal:attributes="href string:${picture/url}" data-lightbox="example-set" data-title=" ">
+                             <img tal:attributes="src string:${picture/url}; title picture/title;" class="example-image make-box"/>
                             </a>
                         </div>
                     </tal:block>
@@ -39,13 +39,12 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                         <h4><span tal:content="context/localita" />&nbsp;<span tal:content="context/provincia" /></h4>
                     </div>
                     <div class="col-xs-3 logo_classe"><!-- RECUPERARE logo classe energetica: classe_energ-->
-                        <!--<span tal:content="context/classe_energ" />-->
                         <img
-                            tal:define="navroot context/@@plone_portal_state/navigation_root_url" 
-                            tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/ce${context/classe_energ}.jpg" />
+                            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+                            tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/ce${context/classe_energetica}.jpg" />
                     </div>
                     <div class="col-xs-12 description">
-                        <div tal:content="structure context/full_description/output" />
+                        <div tal:content="structure context/full_description" />
                         <p><span tal:content="context/categoria" /></p> <!-- ToDo fare decodifica -->
                     </div>
                 </div>
@@ -55,7 +54,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                     <div class="row">
                         <div class="col-xs-3">
                             <h3>Vani: <span tal:content="context/vani" /></h3>
-                            <h4>Superficie: <span tal:content="context/superficie" /> mq</h4>
+                            <h4>Superficie: <span tal:content="context/mq" /> mq</h4>
                         </div>
                         <div class="col-xs-3">
                             <h3>Camere: <span tal:content="context/camere" /></h3>
@@ -68,7 +67,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                         <div class="col-xs-3">&nbsp;
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-xs-3">
                             <h3>Condizioni: <span tal:content="context/condizioni" /></h3><!-- ToDo fare decodifica -->
@@ -83,7 +82,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                         </div>
                         <div class="col-xs-3">&nbsp;</div>
                     </div>
-                    
+
                     <div class="col-xs-12 text-right"><!-- Prezzi da gestire in base a valore "contratto" -->
                         <div class="btn bold">
                             <span tal:content="context/getPriceString"/>

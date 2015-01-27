@@ -45,4 +45,18 @@
         description="List folder contents as property summary view"
         />
 
+  <browser:page
+      name="fiaip-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.FIAIPSettingsControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+    name="test-import"
+    for="*"
+    permission="zope2.View"
+    class=".property.testImport"
+    />
+
 </configure>

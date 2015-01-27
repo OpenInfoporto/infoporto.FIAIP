@@ -1,21 +1,12 @@
 from five import grok
 
-from z3c.form import group, field
 from zope import schema
-from zope.interface import invariant, Invalid
-from zope.schema.interfaces import IContextSourceBinder
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from plone.dexterity.content import Container
 
-from plone.directives import dexterity, form
+from plone.directives import form
 from plone.app.textfield import RichText
-from plone.namedfile.field import NamedImage, NamedFile
-from plone.namedfile.field import NamedBlobImage, NamedBlobFile
 from plone.namedfile.interfaces import IImageScaleTraversable
-
-from z3c.relationfield.schema import RelationList, RelationChoice
-from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from infoporto.FIAIP import MessageFactory as _
 
@@ -23,50 +14,28 @@ from collective import dexteritytextindexer
 
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.interfaces import IFolderish
 
-# Interface class; used to define content-type schema.
+from plone import api
+from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 
 class IProperty(form.Schema, IImageScaleTraversable):
     """
     Describe a place to live or work
     """
-	
-	
 
-# ToDo 
-#
-# didascaliaN da legare alle foto 
-#
-
-# Campo utilizzato nella scheda
-    full_description = RichText(
-            title=_(u"Descrizione estesa"),
-            required=False,
-    )
-
-    id = schema.TextLine(
-            title=_(u"Property ID"),
-            required=False
-        )
-
+    # Campo utilizzato nella scheda
     id_agenzia = schema.TextLine(
             title=_(u"Agency ID"),
             required=False
         )
 
-    email = schema.TextLine(
-            title=_(u"E-mail"),
-            required=False
-        )
-
-# Campo utilizzato nella scheda
     rif = schema.TextLine(
             title=_(u"Property ref."),
             required=False
     )
 
-# Campo utilizzato nella scheda
     dexteritytextindexer.searchable('contratto')
     contratto = schema.Choice(
             title=_("Contract"),
@@ -79,13 +48,33 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
+    cod_regione = schema.TextLine(
+            title=_(u"Codice Regione"),
+            required=False,
+    )
+
     regione = schema.TextLine(
             title=_(u"Regione"),
             required=False,
     )
 
+    cod_provincia = schema.TextLine(
+            title=_(u"Codice provincia"),
+            required=False,
+    )
+
     provincia = schema.TextLine(
             title=_(u"Provincia"),
+            required=False,
+    )
+
+    sigla_provincia = schema.TextLine(
+            title=_(u"Sigla provincia"),
+            required=False,
+    )
+
+    cod_comune = schema.TextLine(
+            title=_(u"Codice comune"),
             required=False,
     )
 
@@ -100,9 +89,18 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
-# Campo utilizzato nella scheda
+    cod_zona_comune = schema.TextLine(
+            title=_(u"Cod. Zona comune"),
+            required=False,
+    )
+
     localita = schema.TextLine(
             title=_(u"Localita'"),
+            required=False,
+    )
+
+    ubicazione = schema.TextLine(
+            title=_(u"Ubicazione'"),
             required=False,
     )
 
@@ -116,12 +114,26 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
+    latitudine = schema.TextLine(
+            title=_(u"latitudine"),
+            required=False,
+    )
+
+    longitudine = schema.TextLine(
+            title=_(u"longitudine"),
+            required=False,
+    )
+
+    cod_tipologia = schema.TextLine(
+            title=_("Codice tipologia"),
+            required=False,
+    )
+
     tipologia = schema.TextLine(
             title=_("Tipologia"),
             required=False,
     )
 
-# Campo utilizzato nella scheda
     dexteritytextindexer.searchable('categoria')
     categoria = schema.Choice(
             title=_("Categoria"),
@@ -130,7 +142,12 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False
     )
 
-# Campo utilizzato nella scheda
+    # testo
+    full_description = RichText(
+            title=_(u"Descrizione estesa"),
+            required=False,
+    )
+
     dexteritytextindexer.searchable('prezzo')
     prezzo = schema.TextLine(
             title=_(u"Prezzo"),
@@ -143,40 +160,32 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
-# Campo utilizzato nella scheda
-    superficie = schema.TextLine(
+    mq = schema.TextLine(
             title=_(u"Superficie"),
             required=False,
     )
 
-# Campo utilizzato nella scheda
     dexteritytextindexer.searchable('vani')
     vani = schema.TextLine(
             title=_(u"Vani"),
             required=False,
     )
 
-# Campo utilizzato nella scheda
     camere = schema.TextLine(
             title=_(u"Camere"),
             required=False,
     )
 
-# Campo utilizzato nella scheda
     bagni = schema.TextLine(
             title=_(u"Bagni"),
             required=False,
     )
 
-# Campo utilizzato nella scheda
-    riscaldamento = schema.Choice(
-            title=_("Riscaldamento"),
-            values=[_(u'Non definite'), _(u'Centralizzato'), _(u'Autonomo'),
-                    _(u'Inesistente')],
-            required=False
+    cod_condizioni = schema.TextLine(
+            title=_(u"Codice condizioni"),
+            required=False,
     )
 
-# Campo utilizzato nella scheda
     condizioni = schema.Choice(
             title=_("Condizioni"),
             values=[_(u'Non definite'),_(u' Nuova costruzione'),
@@ -186,38 +195,19 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
-# Campo utilizzato nella scheda
-    ascensore = schema.Bool(
-            title=_(u"Ascensore"),
+    cod_riscaldamento = schema.TextLine(
+            title=_(u"Codice riscaldamento"),
             required=False,
     )
 
-# Campo utilizzato nella scheda
-    arredato = schema.Bool(
-            title=_(u"Arredato"),
-            required=False,
+    riscaldamento = schema.Choice(
+            title=_("Riscaldamento"),
+            values=[_(u'Non definite'), _(u'Centralizzato'), _(u'Autonomo'),
+                    _(u'Inesistente')],
+            required=False
     )
 
-# Campo utilizzato nella scheda
-    garage = schema.Bool(
-            title=_(u"Garage"),
-            required=False,
-    )
-	
-# Campo utilizzato nella scheda
-    giardino = schema.Bool(
-            title=_(u"Giardino"),
-            required=False,
-    )
-
-# Campo utilizzato nella scheda
-    piano = schema.TextLine(
-            title=_(u"Piano"),
-            required=False,
-    )
-
-# Campo utilizzato nella scheda
-    classe_energ = schema.TextLine(
+    classe_energetica = schema.TextLine(
             title=_(u"Classe energetica"),
             required=False,
     )
@@ -232,10 +222,188 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
+    cod_cucina = schema.TextLine(
+            title=_(u"Codice cucina"),
+            required=False,
+    )
+
+    cucina = schema.TextLine(
+            title=_(u"Cucina"),
+            required=False,
+    )
+
+    garage = schema.Bool(
+            title=_(u"Garage"),
+            required=False,
+    )
+
+    ascensore = schema.Bool(
+            title=_(u"Ascensore"),
+            required=False,
+    )
+
+    arredato = schema.Bool(
+            title=_(u"Arredato"),
+            required=False,
+    )
+
+    condizionatore = schema.Bool(
+            title=_(u"Condizionatore"),
+            required=False,
+    )
+
+    giardino = schema.Bool(
+            title=_(u"Giardino"),
+            required=False,
+    )
+
+    giardino_tipo = schema.TextLine(
+            title=_(u"Tipo giardino"),
+            required=False,
+    )
+
+    giardino_mq = schema.TextLine(
+            title=_(u"Mq giardino"),
+            required=False,
+    )
+
+    email = schema.TextLine(
+            title=_(u"E-mail"),
+            required=False,
+    )
+
+    # foto Element
+    titolo1 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url1 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo2 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url2 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo3 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url3 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo4 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url4 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo5 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url5 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo6 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url6 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo7 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url7 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo8 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url8 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo9 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url9 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo10 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url10 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo11 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url11 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
+    # foto Element
+    titolo12 = schema.TextLine(
+            title=_(u"Foto"),
+            required=False,
+    )
+
+    url12 = schema.TextLine(
+            title=_(u"Url"),
+            required=False,
+    )
+
 
 class Property(Container):
     grok.implements(IProperty)
@@ -263,27 +431,74 @@ class Property(Container):
     # Add your class methods and properties here
 
 
-# View class
-# The view will automatically use a similarly named template in
-# property_templates.
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@sampleview" appended.
-# You may make this the default view for content objects
-# of this type by uncommenting the grok.name line below or by
-# changing the view class name and template filename to View / view.pt.
+class testImport(BrowserView):
+
+    template = ViewPageTemplateFile('property_templates/testimport.pt')
+
+    def __call__(self):
+        print "testImport"
+        from fiaipsync import dataFetcher
+        df = dataFetcher(url="http://62.149.166.102/agenzia_xml/fc86110a489b4c71a73a6abfb2286556.xml")
+
+        fetched = df.getElements(df.connectAndGet())
+
+        print "%s elements found" % len(fetched)
+
+        for el in fetched:
+            title = "%s %s vani %s - %s" % (el['tipologia'], el['vani'], el['comune'], el['ubicazione'])
+            print title
+            more = dict(type="property", title=title, container=api.content.get(path='/immobili/'))
+            obj = api.content.create(type="infoporto.FIAIP.property",
+                                     title=title,
+                                     container=api.content.get(path='/immobili/'),
+                                     **el)
+
+        return self.template()
+
 
 class View(grok.View):
     grok.context(IProperty)
     grok.require('zope2.View')
-    
-    #grok.name('view')
 
     # Add view methods here
-
-    def getPhoto(self):
+    def getPhotos(self):
         context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
+        pics = []
 
-        return catalog(portal_type="Image",
-                       path='/'.join(context.getPhysicalPath()))
+        if context.titolo1:
+            pics.append(dict(url=context.url1, title=context.titolo1))
+
+        if context.titolo2:
+            pics.append(dict(url=context.url2, title=context.titolo2))
+
+        if context.titolo3:
+            pics.append(dict(url=context.url3, title=context.titolo3))
+
+        if context.titolo4:
+            pics.append(dict(url=context.url4, title=context.titolo4))
+
+        if context.titolo5:
+            pics.append(dict(url=context.url5, title=context.titolo5))
+
+        if context.titolo6:
+            pics.append(dict(url=context.url6, title=context.titolo6))
+
+        if context.titolo7:
+            pics.append(dict(url=context.url7, title=context.titolo7))
+
+        if context.titolo8:
+            pics.append(dict(url=context.url8, title=context.titolo8))
+
+        if context.titolo9:
+            pics.append(dict(url=context.url9, title=context.titolo9))
+
+        if context.titolo10:
+            pics.append(dict(url=context.url10, title=context.titolo10))
+
+        if context.titolo11:
+            pics.append(dict(url=context.url11, title=context.titolo11))
+
+        if context.titolo12:
+            pics.append(dict(url=context.url12, title=context.titolo12))
+
+        return pics

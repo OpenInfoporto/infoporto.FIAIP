@@ -43,9 +43,13 @@ class Renderer(base.Renderer):
 
     def getCategoria(self):
         return [None,_(u'Residenziale'), _(u'Commerciale'), _(u'Rustici e terreni'),_(u'Uffici, fondi')]
+    
+    def getCondizioni(self):
+        return [None, _(u'Non definite'),_(u' Nuova costruzione'),_(u'Ristrutturato'),_(u'Da ristrutturare'),_(u'Abitabile'),_(u'Ottime'),_(u'Seminuovo'),]
 
+    # fix values
     def getContratto(self):
-        return [None, _(u'V'), _(u'A'), _(u'S')]
+        return [None, _(u'Vendita'), _(u'Affitto'), _(u'Stagionale')]
 
     def getPrezzoMinimo(self):
         return [None, 10, 200, 500]

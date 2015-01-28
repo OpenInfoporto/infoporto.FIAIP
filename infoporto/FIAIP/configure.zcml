@@ -37,6 +37,9 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <include package=".portlets" />
+  
+
 <browser:menuItem
         for="Products.ATContentTypes.interface.IATFolder"
         menu="plone_displayviews"

@@ -30,6 +30,15 @@
                             </tal:block>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="contrattoInputText3">Condizioni</label>
+                        <select class="form-control"  name="condizioni">
+                            <tal:block tal:repeat="item view/getCondizioni">
+                                <option tal:content="item"  tal:attributes="value item"></option>
+                            </tal:block>
+                        </select>
+                    </div>
                     <div class="col-xs-5 form-group prezzo-left">
                         <label for="contrattoInputText4">Prezzo min</label> 
                         <input type="text" class="col-xs-2 form-control" name="minprice" />
@@ -38,6 +47,12 @@
                         <label for="contrattoInputText5 id=">Prezzo max</label> 
                         <input type="text" class="col-xs-2 form-control" name="maxprice" />
                     </div>
+
+                    <div class="form-group">
+                        <label for="contrattoInputText5 id=">Riferimento</label>
+                        <input type="text" class="form-control" name="riferimento" />
+                    </div>
+
                     <button class="btn btn-lg" type="submit">cerca il tuo immobile</button>
                     <h3>Ricerca rapida</h3>
                     <button class="btn tag" type="submit"  name="vani" value="3">2-3 Vani</button> 
@@ -53,8 +68,11 @@
 <form action="resolveuid/565cf4f627234fc9a2507a899ddf7679" method="get"><button class="btn left" type="submit">inserisci la tua email</button></form><form><br />
 <h3>Come contattarci</h3>
 <div class="home">
-<p>Pellentesque habitant morbi tristique senectus et netus et male suada fames ac turpis egestas. <br /><br /> <span class="blue"> Telefono. 0187-123456 <br /> E-mail info@minottoimmobiliare.it <br /> P.IVA 01212345678 <br /> </span></p>
-<p class="sidebar-footer">MINOTTO IMMOBILIARE <br /><br /> Iscrizione REA n.123456 <br /><br /> è iscritto alla FIAIP n. 123456678</p>
+<p>Minotto Immobiliare si trova in <i>via Roma 32 alla Spezia</i></p>
+<p><span class="blue"> Telefono. 0187-770512 <br /> 
+<span class="blue"> Cellulare. 393-8363316<br />
+P.IVA 01401360118 <br /> </span></p>
+<p class="sidebar-footer">MINOTTO IMMOBILIARE <br />Iscrizione REA n. SP-126079 <br /> è iscritto alla FIAIP n. 28440</p>
 </div>
 </form>
     

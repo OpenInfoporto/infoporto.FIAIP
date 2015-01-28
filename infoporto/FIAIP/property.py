@@ -31,6 +31,7 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False
         )
 
+    dexteritytextindexer.searchable('rif')
     rif = schema.TextLine(
             title=_(u"Property ref."),
             required=False
@@ -191,6 +192,7 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
+    dexteritytextindexer.searchable('condizioni')
     condizioni = schema.Choice(
             title=_("Condizioni"),
             values=[_(u'Non definite'),_(u' Nuova costruzione'),

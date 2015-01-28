@@ -143,6 +143,11 @@ class IProperty(form.Schema, IImageScaleTraversable):
     )
 
     # testo
+    testo = schema.Text(
+            title=_(u"Descrizione"),
+            required=False,
+    )
+
     full_description = RichText(
             title=_(u"Descrizione estesa"),
             required=False,
@@ -447,7 +452,6 @@ class testImport(BrowserView):
         for el in fetched:
             title = "%s %s vani %s - %s" % (el['tipologia'], el['vani'], el['comune'], el['ubicazione'])
             print title
-            more = dict(type="property", title=title, container=api.content.get(path='/immobili/'))
             obj = api.content.create(type="infoporto.FIAIP.property",
                                      title=title,
                                      container=api.content.get(path='/immobili/'),

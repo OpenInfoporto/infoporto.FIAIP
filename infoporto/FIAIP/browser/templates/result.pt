@@ -9,7 +9,7 @@
                 <tal:block tal:repeat="item view/properties">
                     <div class="property">
                         <div class="property-image">
-                            <img tal:attributes="src string:${item/getPreview}/image_thumb" class="make-box"/>
+                            <img tal:attributes="src string:${item/url1}" class="img-rounded"/>
                         </div>
                         <span class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
                         <span class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
@@ -21,11 +21,14 @@
                                 <span class="property-location" tal:content="item/localita"/>
                                 <span class="property-province" tal:content="item/provincia"/>
                             </h5>
-                                <p class="property-description" tal:content="structure item/full_description/output"></p>
+                                <p class="property-description" tal:content="python: (item.testo[:150] + '..') if len(item.testo) > 150 else item.testo"></p>
                         </div>
                         <div class="property-details">
-                            <img tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-                            tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/ce${item/classe_energ}.jpg" />
+                            <div class="col-xs-3 logo_classe">
+                            <img
+                            tal:define="navroot item/@@plone_portal_state/navigation_root_url"
+                            tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/ce${item/classe_energetica}.jpg" />
+                            </div>
                             <span class="property-price" tal:content="item/getPriceString"></span>
                             <a tal:attributes="href item/absolute_url" class="property-read">
                                 Leggi tutto

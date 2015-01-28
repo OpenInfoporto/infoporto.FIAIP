@@ -34,7 +34,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                 </div>
                 <div class="col-xs-12 content-top">
                     <div class="col-xs-9">
-                        <span tal:content="context/rif" />
+                        <p>Rif: <span tal:content="context/rif" /></p>
                         <h3><span tal:content="context/Title" /></h3>
                         <h4><span tal:content="context/localita" />&nbsp;<span tal:content="context/provincia" /></h4>
                     </div>
@@ -44,7 +44,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                             tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/ce${context/classe_energetica}.jpg" />
                     </div>
                     <div class="col-xs-12 description">
-                        <div tal:content="structure context/full_description" />
+                        <div tal:content="context/testo" />
                         <p><span tal:content="context/categoria" /></p> <!-- ToDo fare decodifica -->
                     </div>
                 </div>
@@ -54,7 +54,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                     <div class="row">
                         <div class="col-xs-3">
                             <h3>Vani: <span tal:content="context/vani" /></h3>
-                            <h4>Superficie: <span tal:content="context/mq" /> mq</h4>
+                            <h4>Mq: <span tal:content="context/mq" /></h4>
                         </div>
                         <div class="col-xs-3">
                             <h3>Camere: <span tal:content="context/camere" /></h3>
@@ -89,7 +89,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                         </div>
                     </div>
                     <div class="col-xs-12 text-right"><!-- Il pulsante deve portarsi dietro l'id immobile per la gestione delle richiesta informazioni-->
-                        <a href="#" class="btn"><img tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/icon-email.png" class="email" alt="" />Richiedi info</a>                   </div>
+                        <a tal:attributes="href string:${portal_url}/maggiori-informazioni" class="btn"><img tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/icon-email.png" class="email" alt="" />Richiedi info</a>                   </div>
 
                 </div>
             </div>

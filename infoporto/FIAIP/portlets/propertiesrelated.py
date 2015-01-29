@@ -8,7 +8,7 @@ from zope import schema
 from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from infoporto.FIAIP import FIAIPMessageFactory as _
+#from infoporto.FIAIP import FIAIPMessageFactory as _
 
 from zope.i18nmessageid import MessageFactory
 __ = MessageFactory("plone")

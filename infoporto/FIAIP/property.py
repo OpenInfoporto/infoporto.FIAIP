@@ -411,6 +411,12 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
+    trattativa_riservata = schema.TextLine(
+            title=_(u"Trattativa riservata"),
+            required=False,
+
+    )
+
 
 class Property(Container):
     grok.implements(IProperty)

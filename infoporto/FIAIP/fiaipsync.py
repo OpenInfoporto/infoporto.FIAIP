@@ -20,7 +20,7 @@ class dataFetcher():
             'note_condivise','anno_immobile','livelli_immobile','unita_immobile','vista_mare','spese_condominiali',
             'email','titolo1','url1','titolo2','url2','titolo3','url3','titolo4','url4','titolo5','url5',
             'titolo6','url6','titolo7','url7','titolo8','url8','titolo9','url9','titolo10','url10',
-            'titolo11','url11','titolo12','url12',]
+            'titolo11','url11','titolo12','url12','trattativa_riservata']
 
     def connectAndGet(self):
         xmldoc = minidom.parse(urlopen(self.url))

@@ -66,7 +66,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                         <div class="col-xs-3">
                             <h3>Piano: 
                                 <span tal:content="context/piano" tal:condition="python: context.piano != '-3'" />
-                                <span tal:condition="python: context.piano == '-3'">---</span>
+                                <span tal:condition="python: context.piano == '-3'">Intero edificio</span>
                             </h3>
                             <h4>Ascensore: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.ascensore == '1' else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
@@ -81,7 +81,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                         </div>
                         <div class="col-xs-3">
                             <h3>Giardino: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.giardino == '1' else 'glyphicon glyphicon-remove'"/></h3>
-                            <h4>Garage: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.garage == '1' else 'glyphicon glyphicon-remove'"/></h4>
+                            <h4>Posto auto: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.garage == '1' else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
                         <div class="col-xs-3">
                             <h3>Riscaldamento: <span tal:content="context/riscaldamento" /></h3><!-- ToDo fare decodifica -->
@@ -92,7 +92,8 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                     <div class="col-xs-12 text-right"><!-- Prezzi da gestire in base a valore "contratto" -->
                        <div class="btn disabled bold">
                        <!--<a tal:attributes="href string:${portal_url}/maggiori-informazioni" class="btn">-->
-                            <span tal:content="context/getPriceString"/>
+                            <span tal:condition="python: context.trattativa_riservata == '1'">Trattativa riservata</span>
+                            <span tal:condition="python: context.trattativa_riservata == '0'" tal:content="context/getPriceString"/>
                        <!--</a>-->
                        </div>
                     </div>

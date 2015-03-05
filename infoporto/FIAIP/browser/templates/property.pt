@@ -26,7 +26,9 @@
                 <p class="property-description" tal:content="python: (item.testo[:150] + '..') if len(item.testo) > 150 else item.testo " />
             </div>
              <div class="property-details">
-                <span class="property-price disabled btn left" tal:content="item/getPriceString"></span>
+                <span class="property-price disabled btn left" tal:condition="python: item.trattativa_riservata == '1'">Trattativa riservata</span>
+                <span class="property-price disabled btn left" tal:condition="python: item.trattativa_riservata == '0'" tal:content="item/getPriceString"/>
+
                 <a tal:attributes="href item/absolute_url" class="property-read btn right">
                     Leggi tutto
                 </a>

@@ -3,23 +3,30 @@
       <tal:block tal:repeat="item view/properties">
         <div class="property-block">
             <div class="property-image">
-               <img tal:attributes="src item/url1" />
                 <span class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
                 <span class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
+                <a tal:attributes="href item/absolute_url">   
+                    <img tal:attributes="src item/url1" />
+                </a>
+<!--
+                    <span class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
+                    <span class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
+-->                
             </div>
             <div class="property-contenta border-left">
                 <h4>
                     <span class="property-title" tal:content="item/title"/>
                 </h4>
                 <h5>
+                    <span class="">Rif: <span tal:content="item/rif"/>
                     <span class="property-location" tal:content="item/localita"/>
                     <span class="property-province" tal:content="item/provincia"/>               
                 </h5>
-                <h6 class="">Rif: <span tal:content="item/rif"/></h6>
+               <!-- <h6 class="">Rif: <span tal:content="item/rif"/></h6> -->
                 <p class="property-description" tal:content="python: (item.testo[:150] + '..') if len(item.testo) > 150 else item.testo " />
             </div>
              <div class="property-details">
-                <span class="property-price btn left" tal:content="item/getPriceString"></span>
+                <span class="property-price disabled btn left" tal:content="item/getPriceString"></span>
                 <a tal:attributes="href item/absolute_url" class="property-read btn right">
                     Leggi tutto
                 </a>

@@ -453,7 +453,6 @@ class testImport(BrowserView):
 
         for el in fetched:
             title = "%s %s vani %s - %s" % (el['tipologia'], el['vani'], el['comune'], el['ubicazione'])
-            print title
             obj = api.content.create(type="infoporto.FIAIP.property",
                                      title=title,
                                      container=api.content.get(path='/immobili/'),

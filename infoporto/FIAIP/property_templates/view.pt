@@ -34,9 +34,12 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                 </div>
                 <div class="col-xs-12 content-top">
                     <div class="col-xs-9">
-                        <p>Rif: <span tal:content="context/rif" /></p>
+                        <p>&nbsp;</p>
+                        <span class="absolute-text property-type" tal:condition="python: context.contratto == 'V'">Vendita</span>
+                        <span class="absolute-text property-type" tal:condition="python: context.contratto == 'A'">Affitto</span>
+                        <!--<p>Rif: <span tal:content="context/rif" /></p>-->
                         <h3><span tal:content="context/Title" /></h3>
-                        <h4><span tal:content="context/localita" />&nbsp;<span tal:content="context/provincia" /></h4>
+                        <h4>Rif: <span tal:content="context/rif" /> - <span tal:content="context/localita" />&nbsp;<span tal:content="context/provincia" /></h4>
                     </div>
                     <div class="col-xs-3 logo_classe"><!-- RECUPERARE logo classe energetica: classe_energ-->
                         <img
@@ -61,8 +64,11 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                            <h4>Bagni: <span tal:content="context/bagni" /></h4>
                         </div>
                         <div class="col-xs-3">
-                            <h3>Piano: <span tal:content="context/piano" /></h3>
-                            <h4>Ascensore: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.ascensore else 'glyphicon glyphicon-remove'"/></h4>
+                            <h3>Piano: 
+                                <span tal:content="context/piano" tal:condition="python: context.piano != '-3'" />
+                                <span tal:condition="python: context.piano == '-3'">---</span>
+                            </h3>
+                            <h4>Ascensore: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.ascensore == '1' else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
                         <div class="col-xs-3">&nbsp;
                         </div>
@@ -71,11 +77,11 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                     <div class="row">
                         <div class="col-xs-3">
                             <h3>Condizioni: <span tal:content="context/condizioni" /></h3><!-- ToDo fare decodifica -->
-                            <h4>Arredato: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.arredato else 'glyphicon glyphicon-remove'"/></h4>
+                            <h4>Arredato: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.arredato == '1' else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
                         <div class="col-xs-3">
-                            <h3>Giardino: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.giardino else 'glyphicon glyphicon-remove'"/></h3>
-                            <h4>Garage: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.garage else 'glyphicon glyphicon-remove'"/></h4>
+                            <h3>Giardino: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.giardino == '1' else 'glyphicon glyphicon-remove'"/></h3>
+                            <h4>Garage: <i tal:attributes="class python: 'glyphicon glyphicon-ok' if context.garage == '1' else 'glyphicon glyphicon-remove'"/></h4>
                         </div>
                         <div class="col-xs-3">
                             <h3>Riscaldamento: <span tal:content="context/riscaldamento" /></h3><!-- ToDo fare decodifica -->
@@ -84,12 +90,14 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                     </div>
 
                     <div class="col-xs-12 text-right"><!-- Prezzi da gestire in base a valore "contratto" -->
-                        <div class="btn bold">
+                       <div class="btn disabled bold">
+                       <!--<a tal:attributes="href string:${portal_url}/maggiori-informazioni" class="btn">-->
                             <span tal:content="context/getPriceString"/>
-                        </div>
+                       <!--</a>-->
+                       </div>
                     </div>
                     <div class="col-xs-12 text-right"><!-- Il pulsante deve portarsi dietro l'id immobile per la gestione delle richiesta informazioni-->
-                        <a tal:attributes="href string:${portal_url}/maggiori-informazioni" class="btn"><img tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/icon-email.png" class="email" alt="" />Richiedi info</a>                   </div>
+                        <a tal:attributes="href python: portal_url+'/maggiori-informazioni/?rif-immobile='+context.rif+'&topic='+context.id" class="btn"><img tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/icon-email.png" class="email" alt="" /> Richiedi info </a>                   </div>
 
                 </div>
             </div>

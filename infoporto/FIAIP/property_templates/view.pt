@@ -64,7 +64,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                            <h4>Bagni: <span tal:content="context/bagni" /></h4>
                         </div>
                         <div class="col-xs-3">
-                            <h3>Piano: 
+                            <h3 >Piano: 
                                 <span tal:content="context/piano" tal:condition="python: context.piano != '-3'" />
                                 <span tal:condition="python: context.piano == '-3'">Intero edificio</span>
                             </h3>

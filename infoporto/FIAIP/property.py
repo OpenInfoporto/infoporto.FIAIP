@@ -177,6 +177,11 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
+    piano = schema.TextLine(
+            title=_(u"Piano"),
+            required=False,
+    )
+
     camere = schema.TextLine(
             title=_(u"Camere"),
             required=False,

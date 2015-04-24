@@ -23,7 +23,7 @@
                     <span class="property-province" tal:content="item/provincia"/>               
                 </h5>
                <!-- <h6 class="">Rif: <span tal:content="item/rif"/></h6> -->
-                <p class="property-description" tal:content="python: (item.testo[:150] + '..') if len(item.testo) > 150 else item.testo " />
+                <p tal:condition="item/testo" class="property-description" tal:content="python: (item.testo[:150] + '..') if len(item.testo) > 150 else item.testo " />
             </div>
              <div class="property-details">
                 <span class="property-price disabled btn left" tal:condition="python: item.trattativa_riservata == '1'">Trattativa riservata</span>

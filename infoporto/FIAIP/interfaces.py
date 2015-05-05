@@ -5,6 +5,7 @@ from zope.interface import Interface
 class IFIAIP(Interface):
     pass
 
+
 class IFIAIPSettings(Interface):
 
     sync_url  = schema.URI(title=u"URL",

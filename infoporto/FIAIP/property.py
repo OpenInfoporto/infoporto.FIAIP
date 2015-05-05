@@ -44,7 +44,7 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False
     )
 
-    data = schema.Datetime(
+    data = schema.TextLine(
             title=_(u"Data inserimento o modifica"),
             required=False,
     )
@@ -422,9 +422,8 @@ class IProperty(form.Schema, IImageScaleTraversable):
 
     )
 
-    skip_sync = schema.Choice(
+    skip_sync = schema.Bool(
             title=_("Skip sync"),
-            values=[_(u'Yes'), _(u'No')],
             required=False
     )
 

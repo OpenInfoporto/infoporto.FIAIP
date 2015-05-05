@@ -422,6 +422,12 @@ class IProperty(form.Schema, IImageScaleTraversable):
 
     )
 
+    skip_sync = schema.Choice(
+            title=_("Skip sync"),
+            values=[_(u'Yes'), _(u'No')],
+            required=False
+    )
+
 
 class Property(Container):
     grok.implements(IProperty)

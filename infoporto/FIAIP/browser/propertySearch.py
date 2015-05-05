@@ -42,7 +42,8 @@ class Renderer(base.Renderer):
         return set([el.comune for el in catalog(portal_type='infoporto.FIAIP.property')])
 
     def getCategoria(self):
-        return [None,_(u'Residenziale'), _(u'Commerciale'), _(u'Rustici e terreni'),_(u'Uffici, fondi')]
+        return [None,_(u'Residenziale'), _(u'Commerciale'), _(u'Rustici e terreni'),
+                    _(u'Uffici, fondi')]
     
     def getCondizioni(self):
         return [None, _(u'Non definite'),_(u' Nuova costruzione'),_(u'Ristrutturato'),_(u'Da ristrutturare'),_(u'Abitabile'),_(u'Ottime'),_(u'Seminuovo'),]

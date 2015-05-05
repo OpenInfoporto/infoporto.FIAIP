@@ -27,7 +27,11 @@ class Result(BrowserView):
                 query["comune"] = self.comune
 
             if self.category:
-                query["categoria"] = self.category
+                categories = {'Residenziale': 'R',
+                              'Commerciale': 'C',
+                              'Rustici e terreni': 'T',
+                              'Uffici, fondi': 'U'}
+                query["cod_categoria"] = categories.get(self.category)
 
             if self.contratto:
                 query["contratto"] = self.contratto
@@ -41,6 +45,5 @@ class Result(BrowserView):
             items = catalog.searchResults(query) 
         else:
             items = catalog.searchResults({'portal_type': 'infoporto.FIAIP.property', 'vani': self.request.form["vani"]})
-
 
         return [x.getObject() for x in items]

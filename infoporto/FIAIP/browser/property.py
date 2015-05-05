@@ -52,7 +52,7 @@ class Renderer(base.Renderer):
         portal = api.portal.get()
         folder = portal.restrictedTraverse(folder_path.strip('/'))
         items = folder.getFolderContents()
-        return [x.getObject() for x in items]
+        return [x.getObject() for x in items[:20]]
        
          
 class AddForm(base.AddForm):

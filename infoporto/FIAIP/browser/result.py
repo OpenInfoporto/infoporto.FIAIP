@@ -38,10 +38,10 @@ class Result(BrowserView):
                 query["contratto"] = self.contratto[:1]
 
             if self.minprice:
-                query["price"] = {'query': self.request.form["minprice"], 'range': 'min'}
+                query["price"] = {'query': float(self.request.form["minprice"]), 'range': 'min'}
 
             if self.maxprice:
-                query["price"] = {'query': self.request.form["maxprice"], 'range': 'max'}
+                query["price"] = {'query': float(self.request.form["maxprice"]), 'range': 'max'}
 
             if self.rif:
                 query["rif"] = self.rif

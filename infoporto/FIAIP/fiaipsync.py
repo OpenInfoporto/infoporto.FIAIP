@@ -5,7 +5,7 @@ from urllib2 import urlopen
 class dataFetcher():
 
     def __init__(self, url):
-        self.url = url #"http://62.149.166.102/agenzia_xml/fc86110a489b4c71a73a6abfb2286556.xml"
+        self.url = "http://62.149.166.102/agenzia_xml/fc86110a489b4c71a73a6abfb2286556.xml"
 
         self.fields = ['id_agenzia','rif','contratto','data','cod_regione','regione','cod_provincia',
             'provincia','sigla_provincia','cod_comune','comune','cod_istat','cod_zona_comune','localita',

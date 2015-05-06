@@ -18,6 +18,7 @@ class Result(BrowserView):
         self.contratto = self.request.form["contratto"]
         self.minprice = self.request.form["minprice"]
         self.maxprice = self.request.form["maxprice"]
+        self.rif = self.request.form["riferimento"]
 
     def properties(self):
         catalog = getToolByName(self.context, 'portal_catalog')
@@ -34,13 +35,16 @@ class Result(BrowserView):
                 query["cod_categoria"] = categories.get(self.category)
 
             if self.contratto:
-                query["contratto"] = self.contratto
+                query["contratto"] = self.contratto[:1]
 
             if self.minprice:
                 query["price"] = {'query': self.request.form["minprice"], 'range': 'min'}
 
             if self.maxprice:
                 query["price"] = {'query': self.request.form["maxprice"], 'range': 'max'}
+
+            if self.rif:
+                query["rif"] = self.rif
            
             items = catalog.searchResults(query) 
         else:

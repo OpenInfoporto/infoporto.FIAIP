@@ -515,14 +515,15 @@ class testImport(BrowserView):
 
         logger.info("%s elements on remote vs %s elements locally" % (len(fetched), len(items)))
 
+        """
         tobe_removed = list(set(items)-set(fetched))
         for i in tobe_removed:
             el = catalog(portal_type='infoporto.FIAIP.property',rif=i)
             logger.info("Deleting unmatched item ref %s..." % i)
             api.content.delete(existing[0].getObject())
 
+        """
         return self.template()
-
 
 class View(grok.View):
     grok.context(IProperty)

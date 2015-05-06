@@ -513,7 +513,7 @@ class testImport(BrowserView):
         logger.info("Checking for something to remove...")
         items = catalog(portal_type='infoporto.FIAIP.property')
 
-        logger.info("%s elements on remote vs %s elements locally" % (len(fetched), len(item)))
+        logger.info("%s elements on remote vs %s elements locally" % (len(fetched), len(items)))
 
         tobe_removed = list(set(items)-set(fetched))
         for i in tobe_removed:

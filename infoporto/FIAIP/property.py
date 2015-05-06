@@ -9,7 +9,7 @@ from plone.app.textfield import RichText
 from plone.namedfile.interfaces import IImageScaleTraversable
 
 from infoporto.FIAIP import MessageFactory as _
-
+from fiaipsync import dataFetcher
 from collective import dexteritytextindexer
 
 from Acquisition import aq_inner
@@ -18,6 +18,10 @@ from Products.CMFCore.utils import getToolByName
 from plone import api
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+import logging
+
+
+logger = logging.getLogger('infoporto.FIAIP')
 
 
 class IProperty(form.Schema, IImageScaleTraversable):
@@ -459,20 +463,63 @@ class testImport(BrowserView):
     template = ViewPageTemplateFile('property_templates/testimport.pt')
 
     def __call__(self):
-        print "testImport"
-        from fiaipsync import dataFetcher
+
         df = dataFetcher(url="http://62.149.166.102/agenzia_xml/fc86110a489b4c71a73a6abfb2286556.xml")
 
         fetched = df.getElements(df.connectAndGet())
 
-        print "%s elements found" % len(fetched)
+        logger.info("%s elements found" % len(fetched))
+
+        ref_list = []
 
         for el in fetched:
-            title = "%s %s vani %s - %s" % (el['tipologia'], el['vani'], el['comune'], el['ubicazione'])
-            obj = api.content.create(type="infoporto.FIAIP.property",
-                                     title=title,
-                                     container=api.content.get(path='/immobili/'),
-                                     **el)
+            ref_list.append(el['rif'])
+
+            catalog = api.portal.get_tool(name='portal_catalog')
+            existing = catalog(portal_type='infoporto.FIAIP.property',
+                               rif=el['rif'])
+
+            if existing:
+                logger.info("Existing found for ref %s" % el['rif'])
+
+                if existing[0].getObject().skip_sync:
+                    logger.info("skip_sync flag found for %s" % el['rif'])
+
+                else:
+                    logger.info("No skip_sync flag found for %s" % el['rif'])
+                    logger.info("Deleting existing %s..." % el['rif'])
+                    api.content.delete(existing[0].getObject())
+
+                    logger.info("Creating ref: %s..." % el['rif'])
+                    title = "%s %s vani %s - %s" % (el['tipologia'], el['vani'], el['comune'], el['ubicazione'])
+                    obj = api.content.create(type="infoporto.FIAIP.property",
+                                             title=title,
+                                             container=api.content.get(path='/immobili/'),
+                                             **el)
+                    api.content.transition(transition='publish', obj=obj)
+
+            else:
+                logger.info("No existing item found for ref %s" % el['rif'])
+
+                logger.info("Creating ref: %s..." % el['rif'])
+                title = "%s %s vani %s - %s" % (el['tipologia'], el['vani'], el['comune'], el['ubicazione'])
+                obj = api.content.create(type="infoporto.FIAIP.property",
+                                         title=title,
+                                         container=api.content.get(path='/immobili/'),
+                                         **el)
+                api.content.transition(transition='publish', obj=obj)
+
+        # clean up not existing
+        logger.info("Checking for something to remove...")
+        items = catalog(portal_type='infoporto.FIAIP.property')
+
+        logger.info("%s elements on remote vs %s elements locally" % (len(fetched), len(item)))
+
+        tobe_removed = list(set(items)-set(fetched))
+        for i in tobe_removed:
+            el = catalog(portal_type='infoporto.FIAIP.property',rif=i)
+            logger.info("Deleting unmatched item ref %s..." % i)
+            api.content.delete(existing[0].getObject())
 
         return self.template()
 

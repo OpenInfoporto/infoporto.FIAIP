@@ -5,7 +5,7 @@ version = '1.0'
 
 setup(name='infoporto.FIAIP',
       version=version,
-      description="Module to manage houses data compliant to FIAIP standard",
+      description="FIAIP Integration",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from

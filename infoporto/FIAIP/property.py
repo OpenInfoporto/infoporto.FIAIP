@@ -475,6 +475,14 @@ class testImport(BrowserView):
         for el in fetched:
             ref_list.append(el['rif'])
 
+            print el['prezzo']
+
+            try:
+                el['price'] = float(el['prezzo'])
+            except:
+                logger.error('Error converting price for %s' % el['rif'])
+
+
             catalog = api.portal.get_tool(name='portal_catalog')
             existing = catalog(portal_type='infoporto.FIAIP.property',
                                rif=el['rif'])

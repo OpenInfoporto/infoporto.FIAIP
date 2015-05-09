@@ -8,6 +8,10 @@
                 <a tal:attributes="href item/absolute_url">   
                     <img tal:attributes="src item/url1" />
                 </a>
+
+                <a tal:attributes="href item/absolute_url">
+                    <img tal:attributes="src item/getPreview" />
+                </a>
 <!--
                     <span class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
                     <span class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>

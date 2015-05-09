@@ -578,4 +578,14 @@ class View(grok.View):
         if context.titolo12:
             pics.append(dict(url=context.url12, title=context.titolo12))
 
+
+        catalog = getToolByName(context, 'portal_catalog')
+
+        limit = 1
+        local_pics =  catalog(portal_type="Image", path='/'.join(context.getPhysicalPath()))
+
+        for lp in local_pics:
+            lp = lp.getObject()
+            pics.append(dict(url=lp.absolute_url(), title=lp.title))
+
         return pics

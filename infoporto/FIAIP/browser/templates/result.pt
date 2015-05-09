@@ -12,8 +12,8 @@
                         <div class="property-image">
                             <img tal:attributes="src string:${item/url1}" class="img-rounded"/>
                         </div>
-                        <span class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
-                        <span class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
+                        <span style="width:120px" class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
+                        <span style="width:120px" class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
                         <div class="property-content">
                             <h4>
                                 <span class="property-title" tal:content="item/title"/>

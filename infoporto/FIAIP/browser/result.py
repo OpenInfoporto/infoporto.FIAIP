@@ -46,8 +46,6 @@ class Result(BrowserView):
             if self.rif:
                 query["rif"] = self.rif
 
-            import pdb; pdb.set_trace()
-
             items = catalog.searchResults(query)
         else:
             items = catalog.searchResults({'portal_type': 'infoporto.FIAIP.property', 'vani': self.request.form["vani"]})

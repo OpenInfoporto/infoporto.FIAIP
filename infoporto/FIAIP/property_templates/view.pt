@@ -41,7 +41,7 @@ $('.test').append('<li data-transition="fade" data-slotamount="7" data-masterspe
                         <h3><span tal:content="context/Title" /></h3>
                         <h4>Rif: <span tal:content="context/rif" /> - <span tal:content="context/localita" />&nbsp;<span tal:content="context/provincia" /></h4>
                     </div>
-                    <div class="col-xs-3 logo_classe"><!-- RECUPERARE logo classe energetica: classe_energ-->
+                    <div tal:condition="context/classe_energetica" class="col-xs-3 logo_classe"><!-- RECUPERARE logo classe energetica: classe_energ-->
                         <img
                             tal:define="navroot context/@@plone_portal_state/navigation_root_url"
                             tal:attributes="src string:${navroot}/++resource++infoporto.FIAIP/img/ce${context/classe_energetica}.jpg" />

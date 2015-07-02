@@ -170,6 +170,7 @@ class IProperty(form.Schema, IImageScaleTraversable):
             required=False,
     )
 
+    dexteritytextindexer.searchable('mq')
     mq = schema.TextLine(
             title=_(u"Superficie"),
             required=False,
@@ -449,6 +450,7 @@ class Property(Container):
         return None
 
     def getPreview(self):
+        print "getPreview"
         for item in self.listFolderContents():
             return item.absolute_url()
 

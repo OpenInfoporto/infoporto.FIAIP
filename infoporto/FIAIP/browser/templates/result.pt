@@ -10,7 +10,7 @@
                 <tal:block tal:repeat="item view/properties">
                     <div class="property">
                         <div class="property-image">
-                            <img tal:attributes="src string:${item/url1}" class="img-rounded"/>
+                            <img tal:attributes="src item/getPreview" />
                         </div>
                         <span style="width:120px" class="absolute-text property-type" tal:condition="python: item.contratto == 'V'">Vendita</span>
                         <span style="width:120px" class="absolute-text property-type" tal:condition="python: item.contratto == 'A'">Affitto</span>
@@ -23,7 +23,7 @@
                                 <span class="property-location" tal:content="item/localita"/>
                                 <span class="property-province" tal:content="item/provincia"/>
                             </h5>
-                                <p class="property-description" tal:content="python: (item.testo[:150] + '..') if len(item.testo) > 150 else item.testo"></p>
+                                <p tal:condition="item/testo" class="property-description" tal:content="python: (item.testo[:150] + '..') if len(item.testo) > 150 else item.testo"></p>
                         </div>
                         <div class="property-details">
                             <div class="col-xs-3 logo_classe">

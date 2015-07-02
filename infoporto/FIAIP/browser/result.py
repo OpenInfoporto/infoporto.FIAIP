@@ -19,6 +19,8 @@ class Result(BrowserView):
         self.minprice = self.request.form["minprice"]
         self.maxprice = self.request.form["maxprice"]
         self.rif = self.request.form["riferimento"]
+        self.mq = self.request.form["mq"]
+
 
     def properties(self):
         catalog = getToolByName(self.context, 'portal_catalog')
@@ -49,6 +51,9 @@ class Result(BrowserView):
 
             if self.maxprice:
                 query["price"] = {'query': float(self.request.form["maxprice"]), 'range': 'max'}
+            
+            if self.mq:
+                query["mq"] = {'query': self.request.form["mq"]}
 
             items = catalog.searchResults(query)
 

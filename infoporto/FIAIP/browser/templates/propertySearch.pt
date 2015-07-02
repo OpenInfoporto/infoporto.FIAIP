@@ -48,20 +48,26 @@
                         <input type="text" class="col-xs-2 form-control" name="maxprice" />
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-xs-5 prezzo-left">
+                        <label for="contrattoInputText5 id=">Mq</label>
+                        <input type="text" class="form-control" name="mq" />
+                    </div>
+
+                    <div class="form-group col-xs-5 prezzo-right">
                         <label for="contrattoInputText5 id=">Riferimento</label>
                         <input type="text" class="form-control" name="riferimento" />
                     </div>
 
                     <button class="btn btn-lg" type="submit">cerca il tuo immobile</button>
                     <h3>Ricerca rapida</h3>
-                    <button class="btn tag" type="submit"  name="vani" value="3">2-3 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="2">2 Vani</button> 
+                    <button class="btn tag" type="submit"  name="vani" value="3">3 Vani</button> 
                     <button class="btn tag" type="submit"  name="vani" value="4">4 Vani</button> 
                     <button class="btn tag" type="submit"  name="vani" value="5">5+ Vani</button> 
-                    <button class="btn tag" type="submit"  name="vani" value="Affitti">Affitti</button> 
-                    <button class="btn tag" type="submit"  name="vani" value="Fondi">Fondi</button> 
-                    <button class="btn tag" type="submit"  name="vani" value="Rustici">Rustici</button>
-                    <button class="btn tag" type="submit"  name="vani" value="Indipendenti">Indipendenti</button>
+                    <button class="btn tag" type="submit"  name="categoria" value="Affitti">Affitti</button> 
+                    <button class="btn tag" type="submit"  name="categoria" value="Fondi">Fondi</button> 
+                    <button class="btn tag" type="submit"  name="categoria" value="Rustici">Rustici</button>
+                    <button class="btn tag" type="submit"  name="categoria" value="Indipendenti">Indipen.</button>
                 </form>
             <h4>non hai trovato l’immobile?</h4>
 <p>Lo cerchiamo noi per te. Inserisci i tuoi dati anagrafici e sarai ricontattato.</p>

@@ -21,6 +21,13 @@
     <index name="contratto" meta_type="FieldIndex">
         <indexed_attr value="contratto"/>
     </index>
+    <index name="mq" meta_type="FieldIndex">
+        <indexed_attr value="mq"/>
+    </index>
+
+         <index name="rif" meta_type="DateIndex">
+                <property name="rif">True</property>
+        </index>
 
     <column value="prezzo"/>
     <column value="price"/>
@@ -29,4 +36,5 @@
     <column value="contratto"/>
     <column value="categoria"/>
     <column value="vani"/>
+    <column value="mq"/>
 </object>

@@ -539,6 +539,8 @@ class View(grok.View):
     grok.context(IProperty)
     grok.require('zope2.View')
 
+    # sorting
+
     # Add view methods here
     def getPhotos(self):
         context = aq_inner(self.context)

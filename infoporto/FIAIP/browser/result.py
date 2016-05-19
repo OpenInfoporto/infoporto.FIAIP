@@ -41,7 +41,8 @@ class Result(BrowserView):
                               'Commerciale': 'C',
                               'Rustici e terreni': 'T',
                               'Uffici, fondi': 'U'}
-                query["cod_categoria"] = categories.get(self.category)
+                #query["categoria"] = categories.get(self.category)
+                query["categoria"] = self.category
 
             if self.contratto:
                 query["contratto"] = self.contratto[:1]
